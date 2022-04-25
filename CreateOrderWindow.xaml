@@ -1,0 +1,32 @@
+﻿<Window x:Class="LibraryApplication.CreateOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryApplication"
+        mc:Ignorable="d"
+        Title="CreateOrderWindow" Height="165" Width="381">
+    <Grid Margin="0,0,0,14">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+
+        </Grid.RowDefinitions>
+        <Label Content="Order:" Grid.Row="0" Grid.Column="0"/>
+        <Label Content="User:" Grid.Row="1" Grid.Column="0"/>
+        <Label Content="Librarian:" Grid.Row="2" Grid.Column="0"/>
+        <Label Content="Checkout Date:" Grid.Row="3" Grid.Column="0"/>
+        <TextBox x:Name="tbUser" Grid.Row="1" Grid.Column="1" Text="User"/>
+        <TextBox x:Name="tbLibrarian" Grid.Row="2" Grid.Column="1" Text="Librarian"/>
+        <DatePickerTextBox x:Name="tbCheckoutDate" Grid.Row="3" Grid.Column="1" Text="Date"/>
+        <Button x:Name="btAdd" Grid.Row="3" Grid.Column="1" Width="40" Height="20" Content="Add" Click="btAdd_Click" Margin="56,25,190,15" Grid.RowSpan="2"/>
+        <Button x:Name="btCancel" Grid.Row="3" Grid.Column="1" Width="60" Height="20" Content="Cancel" Click="btCancel_Click" Margin="143,25,83,15" Grid.RowSpan="2"/>
+    </Grid>
+</Window>

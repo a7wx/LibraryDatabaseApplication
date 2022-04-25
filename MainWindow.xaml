@@ -1,0 +1,127 @@
+﻿<Window x:Class="LibraryApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:LibraryApplication.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Grid.Column="1" Margin="100,6,60,6">
+            <MenuItem Header="_Add">
+                <MenuItem Header="_Author" Command="{Binding NewAuthorCommand}"/>
+                <MenuItem Header="_Book" Command="{Binding NewBookCommand}"/>
+                <MenuItem Header="_Genre" Command="{Binding NewGenreCommand}"/>
+                <MenuItem Header="_Series" Command="{Binding NewSeriesCommand}"/>
+                <MenuItem Header="_Librarian" Command="{Binding NewLibrarianCommand}"/>
+                <MenuItem Header="_User" Command="{Binding NewUserCommand}"/>
+            </MenuItem>
+        </Menu>
+        <Button Grid.Row="0" Grid.Column="2" Margin="0,5, 350, 5" Content="Create Order" Command="{Binding NewOrderCommand}"/>
+        <Button Grid.Row="0" Grid.Column="2" Margin="292,5,0,5" HorizontalAlignment="Left" Content="Return Book" Command="{Binding EditOrderCommand}"/>
+
+        <Button x:Name="EditBookButton" Grid.Row="2" Grid.Column="1" Margin="0,5,70,5" Content="Edit Selected Item" Visibility ="Visible" Command="{Binding EditBookCommand}"/>
+        <Button x:Name="EditOrderButton" Grid.Row="2" Grid.Column="1" Margin="0,5,70,5" Content="Edit Selected Item" Visibility ="Hidden" Command="{Binding EditOrderCommand}"/>
+        <Button x:Name="EditSeriesButton" Grid.Row="2" Grid.Column="1" Margin="0,5,70,5" Content="Edit Selected Item" Visibility ="Hidden" Command="{Binding EditSeriesCommand}"/>
+        <Button x:Name="EditAuthorButton" Grid.Row="2" Grid.Column="1" Margin="0,5,70,5" Content="Edit Selected Item" Visibility ="Hidden" Command="{Binding EditAuthorCommand}"/>
+        <Button x:Name="EditGenreButton" Grid.Row="2" Grid.Column="1" Margin="0,5,70,5" Content="Edit Selected Item" Visibility ="Hidden" Command="{Binding EditGenreCommand}"/>
+        <Button x:Name="EditUserButton" Grid.Row="2" Grid.Column="1" Margin="0,5,70,5" Content="Edit Selected Item" Visibility ="Hidden" Command="{Binding EditUserCommand}"/>
+        <Button x:Name="EditLibrarianButton" Grid.Row="2" Grid.Column="1" Margin="0,5,70,5" Content="Edit Selected Item" Visibility ="Hidden" Command="{Binding EditLibrarianCommand}"/>
+
+        <Button x:Name="DeleteBookButton" Grid.Row="2" Grid.Column="2" Margin="0,5,275,5" Content="Delete Selected Item" Visibility ="Visible" Command="{Binding DeleteBookCommand}"/>
+        <Button x:Name="DeleteSeriesButton" Grid.Row="2" Grid.Column="2" Margin="0,5,275,5" Content="Delete Selected Item" Visibility ="Hidden" Command="{Binding DeleteSeriesCommand}"/>
+        <Button x:Name="DeleteAuthorButton" Grid.Row="2" Grid.Column="2" Margin="0,5,275,5" Content="Delete Selected Item" Visibility ="Hidden" Command="{Binding DeleteAuthorCommand}"/>
+
+
+        <DataGrid x:Name="GridOrderView" Grid.Row="1" Grid.Column="1"
+                  ItemsSource="{Binding Orders}"
+                  SelectedItem="{Binding SelectedOrder}" 
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True" SelectionMode="Single"
+                  Visibility="Hidden" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Order Number" Binding="{Binding OrderNumber}" Width="*"/>
+                <DataGridTextColumn Header="User" Binding="{Binding User}" Width="*"/>
+                <DataGridTextColumn Header="Book" Binding="{Binding Book}" Width="*"/>
+                <DataGridTextColumn Header="Librarian" Binding="{Binding Librarian}" Width="*"/>
+                <DataGridTextColumn Header="Checkout Date" Binding="{Binding CheckoutDate}" Width="*"/>
+                <DataGridTextColumn Header="Return Date" Binding="{Binding ReturnDate}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid x:Name="GridBookView" Grid.Row="1" Grid.Column="1"
+                  ItemsSource="{Binding Books}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True" SelectionMode="Single"
+                  SelectedItem="{Binding SelectedBook}" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}"  Width="*"/>
+                <DataGridTextColumn Header="Subtitle" Binding="{Binding Subtitle}"  Width="*"/>
+                <DataGridTextColumn Header="SeriesName" Binding="{Binding SeriesName}"  Width="*"/>
+                <DataGridTextColumn Header="Series Position" Binding="{Binding SeriesPos}"  Width="*"/>
+                <DataGridTextColumn Header="Length" Binding="{Binding Length}"  Width="*"/>
+                <DataGridTextColumn Header="Publisher" Binding="{Binding Publisher}"  Width="*"/>
+                <DataGridTextColumn Header="Authors" Binding="{Binding Author}" Width="*"/>
+                <DataGridTextColumn Header="Genres" Binding="{Binding Genre}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid x:Name="GridUserView" Grid.Row="1" Grid.Column="1"
+                  ItemsSource="{Binding Users}"
+                  SelectedItem="{Binding SelectedUser}" 
+                  IsReadOnly="True" SelectionMode="Single"
+                  Visibility ="Hidden" Grid.ColumnSpan="2"/>
+
+        <DataGrid x:Name="GridLibrarianView" Grid.Row="1" Grid.Column="1"
+                  ItemsSource="{Binding Librarians}"
+                  SelectedItem="{Binding SelectedLibrarian}" 
+                  IsReadOnly="True" SelectionMode="Single"
+                  Visibility ="Hidden" Grid.ColumnSpan="2"/>
+
+        <DataGrid x:Name="GridAuthorView" Grid.Row="1" Grid.Column="1"
+                  ItemsSource="{Binding Authors}"
+                  SelectedItem="{Binding SelectedAuthor}" 
+                  IsReadOnly="True" SelectionMode="Single"
+                  Visibility ="Hidden" Grid.ColumnSpan="2"/>
+
+        <DataGrid x:Name="GridGenreView" Grid.Row="1" Grid.Column="1"
+                  ItemsSource="{Binding Genres}"
+                  SelectedItem="{Binding SelectedGenre}" 
+                  IsReadOnly="True" SelectionMode="Single"
+                  Visibility ="Hidden" Grid.ColumnSpan="2"/>
+
+        <DataGrid x:Name="GridSeriesView" Grid.Row="1" Grid.Column="1"
+                  ItemsSource="{Binding Series}"
+                  SelectedItem="{Binding SelectedSeries}" 
+                  IsReadOnly="True" SelectionMode="Single"
+                  Visibility ="Hidden" Grid.ColumnSpan="2"/>
+        <Menu x:Name="ViewSwitcher" Grid.Row="0" Grid.Column="1" Margin="10, 5, 145, 5">
+            <MenuItem Header="_View"  FontSize="14">
+                <MenuItem Header="_Books" FontSize="14" Click="BookView"/>
+                <MenuItem Header="_Authors"  FontSize="14" Click="AuthorView"/>
+                <MenuItem Header="_Users"  FontSize="14" Click="UserView"/>
+                <MenuItem Header="_Librarians"  FontSize="14" Click="LibrarianView"/>
+                <MenuItem Header="_Series"  FontSize="14" Click="SeriesView"/>
+                <MenuItem Header="_Genres"  FontSize="14" Click="GenreView"/>
+                <MenuItem Header="_Orders"  FontSize="14" Click="OrderView"/>
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>
